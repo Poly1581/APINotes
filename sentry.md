@@ -121,8 +121,7 @@ A list of API endpoints related to events and issues can be found [here](https:/
 | Request type | Endpoint | Parameters | Description and Notes | Documentation |
 |--------------|----------|------------|-----------------------|---------------|
 |    `GET`     | `/api/0/projects/ORGANIZATION_ID/PROJECT_ID/events` | N/A | Retrieve a list of errors associated with a given project | [docs.sentry.io](https://docs.sentry.io/api/events/list-a-projects-error-events/) |
-|    `GET`     | `/api/0/projects/ORGANIZATION_ID/PROJECT_ID/issues` | N/A | Retreive a list of issues associated with a given project | [docs.sentry.io](https://docs.sentry.io/api/events/list-a-projects-issues/) |
-
+|    `GET`     | `/api/0/projects/ORGANIZATION_ID/PROJECT_ID/issues` | - `statsPeriod`(string): "24h", "14d", or "" | Retreive a list of issues associated with a given project | [docs.sentry.io](https://docs.sentry.io/api/events/list-a-projects-issues/) |
 
 
 
