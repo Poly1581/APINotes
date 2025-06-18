@@ -67,7 +67,7 @@ sentry_sdk.init(
 Note: Options are available [here](https://docs.sentry.io/platforms/python/integrations/celery/#options).
 Note: Celery 4.0+ with Python 3.6+ are supported.
 
-#### Chrons
+##### Chrons
 
 Chrons allow monitoring of uptime and performance of celery tasks.
 Initialize sentry after celery beat schedule.
@@ -87,7 +87,7 @@ def celery_task():
 ```
 Note: need to supply a `monitor_slug` of a monitor created on sentry.io
 
-### Before Send
+#### Before Send
 
 `before_send` is a callback that allows payload modification before sending events to sentry.
 Investigate using `before_send` to strip sensitive information.
@@ -103,23 +103,26 @@ sentry_sdk.init(
 )
 ```
 
-Typically, a `Hint` holds the original exception - see [hints](https://docs.sentry.io/platforms/python/configuration/filtering/#using-hints)
-### API
+Note: Typically, a `Hint` holds the original exception - see [hints](https://docs.sentry.io/platforms/python/configuration/filtering/#using-hints)
 
-```python
-# Add breadcrumb
-sentry_sdk.add_breadcrumb(category="CATEGORY", message="MESSAGE", level="LEVEL")
-
-# Set tag (key-value pair)
-sentry_sdk.set_tag("KEY", VALUE)
-```
-
-## CLI
+### CLI
 A command line interface is available at [CLI](https://docs.sentry.io/product/cli)
 
-## Notes
+### Notes
 - Sentry grouping is modifiable.
 - Error, stack trace, code, and local variables are all stored.
 - Consider using data scrubbing to filter sensitive information.
 - "Breadcrumbs" are events that happened leading up to error (useful for debug).
+
+## API
+
+A list of API endpoints related to events and issues can be found [here](https://docs.sentry.io/api/events/).
+
+| Request type | Endpoint | Parameters | Description and Notes | Documentation |
+|--------------|----------|------------|-----------------------|---------------|
+|    `GET`     | `/api/0/projects/ORGANIZATION_ID/PROJECT_ID/events` | N/A | Retrieve a list of errors associated with a given project | [docs.sentry.io](https://docs.sentry.io/api/events/list-a-projects-error-events/) |
+|    `GET`     | `/api/0/projects/ORGANIZATION_ID/PROJECT_ID/issues` | N/A | Retreive a list of issues associated with a given project | [docs.sentry.io](https://docs.sentry.io/api/events/list-a-projects-issues/) |
+
+
+
 
