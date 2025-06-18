@@ -118,10 +118,17 @@ A command line interface is available at [CLI](https://docs.sentry.io/product/cl
 
 A list of API endpoints related to events and issues can be found [here](https://docs.sentry.io/api/events/).
 
-| Request type | Endpoint | Parameters | Description and Notes | Documentation |
-|--------------|----------|------------|-----------------------|---------------|
-|    `GET`     | `/api/0/projects/ORGANIZATION_ID/PROJECT_ID/events` | N/A | Retrieve a list of errors associated with a given project | [docs.sentry.io](https://docs.sentry.io/api/events/list-a-projects-error-events/) |
-|    `GET`     | `/api/0/projects/ORGANIZATION_ID/PROJECT_ID/issues` | - `statsPeriod`(string): "24h", "14d", or "" | Retreive a list of issues associated with a given project | [docs.sentry.io](https://docs.sentry.io/api/events/list-a-projects-issues/) |
+| Description and Notes | Request type | Endpoint | Parameters | Scopes | Documentation |
+|--------------|----------|------------|-----------------------|--------|---------------|
+| Retrieve a list of errors |    `GET`     | `/api/0/projects/ORGANIZATION_ID/PROJECT_ID/events` | N/A | project:admin or project:read or project:write | [docs.sentry.io](https://docs.sentry.io/api/events/list-a-projects-error-events/) |
+| Retreive a list of issues |    `GET`     | `/api/0/projects/ORGANIZATION_ID/PROJECT_ID/issues` | `statsPeriod`, `query`, `cursor` | event:read | [docs.sentry.io](https://docs.sentry.io/api/events/list-a-projects-issues/) |
+| Retreive a list of error events associated with an issue |    `GET`     | `/api/0/organizations/ORGANIZATION_ID/issues/ISSUE_ID/events` | `start`, `end`, `environment`, `query` | event:admin or event:read or event:write | [docs.sentry.io](https://docs.sentry.io/api/events/list-an-issues-events/) |
+| Retrieve an issue |`GET` | `/api/0/organizations/ORGANIZATION_ID/issues/ISSUE_ID` | N/A | event:read | [docs.sentry.io](https://docs.sentry.io/api/events/retrieve-an-issue/) |
+| Update an issue | `PUT` | `/api/0/organizations/OGRANIZATION_ID/issues/ISSUE_D` | `status`, `statusDetails`, `assignedTo`, `isBookmarked`, `isSubscribed`, `isPublic` | event:write | [docs.sentry.io](https://docs.sentry.io/api/events/update-an-issue/) |
+| Remove an issue |   `DELETE`   | `/api/0/organizations/ORGANIZATION_ID/issues/ISSUE_ID` | N/A | event:admin | [docs.sentry.io](https://docs.sentry.io/api/events/remove-an-issue/) |
+
+
+Note: Most api endpoints require [authentication via bearer auth token](https://docs.sentry.io/api/auth/).
 
 
 
